@@ -25,12 +25,12 @@ a {
     text-decoration: none ;
 }
 .img-wrapper {
-    width: 100%; /* Define el tamaÃ±o del contenedor */
+    width: 100%; /* Define el tamaÃƒÂ±o del contenedor */
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Oculta cualquier desbordamiento para mantener la forma del cÃ­rculo */
+    overflow: hidden; /* Oculta cualquier desbordamiento para mantener la forma del cÃƒÂ­rculo */
 }
 
 .img-wrapper img {
@@ -76,11 +76,11 @@ img {
 }
 
 .img-container {
-    width: 100%; /* Ajusta el ancho segÃºn necesites */
+    width: 100%; /* Ajusta el ancho segÃƒÂºn necesites */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Para asegurar que cualquier transformaciÃ³n no exceda el contenedor */
+    overflow: hidden; /* Para asegurar que cualquier transformaciÃƒÂ³n no exceda el contenedor */
     position: relative;
 }
 
@@ -92,7 +92,7 @@ img {
     right: 0;
     bottom: 0;
     background: rgba(255, 255, 255, 0); /* Fondo semi-transparente */
-    z-index: 2; /* AsegÃºrate de que estÃ© encima de la imagen */
+    z-index: 2; /* AsegÃƒÂºrate de que estÃƒÂ© encima de la imagen */
 }
 
 .img-container:hover {
@@ -184,7 +184,7 @@ nav{
 
 .btn:hover {
     background: linear-gradient(var(--amethyst), var(--turquoise)); /* Estilo de hover con colores invertidos */
-    animation: skewBoing 0.4s ease forwards; /* Aplica la animaciÃ³n */
+    animation: skewBoing 0.4s ease forwards; /* Aplica la animaciÃƒÂ³n */
     text-shadow: 
     -1px -1px 0 #000,  
      1px -1px 0 #000,
@@ -263,14 +263,14 @@ header .image::before {
     top: 0;
     left: 75%;
     transform: translateX(-50%);
-    font-size: 25rem;
+    font-size: 15rem;
     font-weight: 400;
-    line-height: 35rem ;
+    line-height: 35rem;
     opacity: 0.2;
     z-index: -100;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 2.25px var(--grape);
-    text-shadow: 0 0 10px var(--tekhelet); ;
+    text-shadow: 0 0 10px var(--tekhelet);
 }
 header .image::after {
     content: "D";
@@ -450,7 +450,6 @@ footer .column {
     margin-bottom: 1rem;
     color: var(--antiflash-white);
     padding-left: 15%;
-    background-color: var(--black-coral);
 }
 
 footer .column .social {
@@ -539,6 +538,35 @@ footer .column a:hover {
     background-color: var(--blue-ncs);
 }
 
+
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+    header {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    header .image {
+        grid-area: 1 / 1 / 1/ 1;
+    }
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pricing {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    footer {
+        grid-template-columns: repeat(1, 1fr);
+        
+    }
+    .services {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+
+}
 
 
 
