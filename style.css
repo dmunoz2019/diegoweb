@@ -1,0 +1,544 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+:root{
+    --antiflash-white: hsla(210, 25%, 95%, 1);
+--turquoise: hsla(172, 84%, 59%, 1);
+--blue-ncs: hsla(199, 63%, 43%, 1);
+--amethyst: hsla(277, 76%, 63%, 1);
+--blue-violet: hsla(264, 70%, 56%, 1);
+--grape: hsla(258, 57%, 48%, 1);
+--tekhelet: hsla(259, 41%, 33%, 1);
+--ultra-violet: hsla(233, 24%, 51%, 1);
+--rich-black: hsla(214, 47%, 7%, 1);
+--black-coral: hsla(210, 36%, 16%, 1);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none ;
+}
+.img-wrapper {
+    width: 100%; /* Define el tamaÃ±o del contenedor */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier desbordamiento para mantener la forma del cÃ­rculo */
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block; /* Asegura que la imagen se ajuste correctamente */
+}
+
+.img-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    width: 95%;
+    height: 90%;
+    border-radius: 80%; /* Crea una forma circular */
+    box-shadow: 0 0 0 3px var(--amethyst); 
+    clip-path: circle(0% at 25% 25%); 
+    transition: clip-path 0.2s ease-out;
+    animation: spin 2s linear infinite;
+}
+
+.img-wrapper:hover::after {
+    clip-path: circle(70% at 50% 50%); 
+    animation-play-state: running;
+}
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+    
+}
+
+
+img {
+    width: 100%;
+    display: flex;
+}
+
+.img-container {
+    width: 100%; /* Ajusta el ancho segÃºn necesites */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Para asegurar que cualquier transformaciÃ³n no exceda el contenedor */
+    position: relative;
+}
+
+.img-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0); /* Fondo semi-transparente */
+    z-index: 2; /* AsegÃºrate de que estÃ© encima de la imagen */
+}
+
+.img-container:hover {
+    animation: crazySkewBoing 0.5s ease forwards;
+}
+
+@keyframes crazySkewBoing {
+    0%, 100% {
+        transform: skew(0deg, 0deg);
+    }
+    25% {
+        transform: skewX(10deg);
+    }
+    50% {
+        transform: skewY(-10deg);
+    }
+    75% {
+        transform: skew(10deg, 10deg);
+    }
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--rich-black);
+}
+
+
+nav{
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.nav-logo {
+    max-width: 100px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 3rem ;
+}
+
+.link a {
+    position: relative;
+    padding-bottom: 0.75rem;
+    color: var(--antiflash-white);
+}
+
+.link a::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 0%; 
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to left, var(--amethyst) 50%, var(--turquoise) 50%);
+    transition: all 0.5s ease;
+}
+
+.link a:hover::after {
+    width: 100%; 
+}
+
+.btn {
+    margin-top: 4.5vh;
+    text-align: center;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    height: 90px;
+    vertical-align: middle;
+    line-height: normal;
+    width: 10rem;
+    border: 5px solid #9198e5; /* Ajusta este color si es necesario */
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--antiflash-white);
+    margin-left: 20px;
+    margin-right: 20px;
+    background: var(--rich-black); /* Estilo inicial usando tus colores */
+    transition: background 0.4s;
+    transition-timing-function: cubic-bezier(0.5, 3, 0, 1);
+}
+
+.btn:hover {
+    background: linear-gradient(var(--amethyst), var(--turquoise)); /* Estilo de hover con colores invertidos */
+    animation: skewBoing 0.4s ease forwards; /* Aplica la animaciÃ³n */
+    text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+@keyframes skewBoing {
+    0%, 100% {
+        transform: skewX(0deg);
+    }
+    25% {
+        transform: skewX(-25deg);
+    }
+    50% {
+        transform: skewX(25deg);
+    }
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 5rem 2rem;
+}
+
+.blur {
+    position: static;
+    box-shadow: 0 0 100px 25px #9198e5;
+    z-index: -100;
+}
+
+
+
+header{
+    position: relative;
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2rem;
+}
+
+header .content h4 {
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+header .content h1 {
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 4rem;
+}
+
+header .content h1 span {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px var(--amethyst);
+}
+
+header .content p {
+    margin-bottom: 2rem;
+    color: var(--antiflash-white);
+}
+
+header  .image{
+    position: relative;
+}
+
+header .image::before {
+    content: "M";
+    position: absolute;
+    top: 0;
+    left: 75%;
+    transform: translateX(-50%);
+    font-size: 25rem;
+    font-weight: 400;
+    line-height: 35rem ;
+    opacity: 0.2;
+    z-index: -100;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2.25px var(--grape);
+    text-shadow: 0 0 10px var(--tekhelet); ;
+}
+header .image::after {
+    content: "D";
+    position: absolute;
+    top: 0;
+    left: 35%;
+    transform: translateX(-50%);
+    font-size: 25rem;
+    font-weight: 400;
+    line-height: 20rem ;
+    color: var(--turquoise);
+    opacity: 0.8;
+    z-index: -100;
+}
+
+header .image img {
+    max-width: 600px;
+    margin: auto;
+}
+
+section .header {
+    text-align: center;
+    margin-bottom: 1rem;
+    color:  var(--antiflash-white);
+    font-size: 2.25rem;
+    font-weight: 700;
+
+}
+
+.services {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.services .card {
+    padding: 2rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.services .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px 0 var(--turquoise);
+    text-shadow:
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+
+}
+
+.services .card span {
+    display: inline-block;
+    -webkit-text-fill-color: linear-gradient(var(--amethyst), var(--turquoise));
+    -webkit-text-stroke: 2.25px var(--grape);
+    padding: 2px 10px;
+    margin-bottom: 1rem;
+    font-size: 3.75rem;
+    color: var(--ultra-violet);
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+.services .card h4 {
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.services .card p {
+    color: var(--antiflash-white);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.services .card a {
+    color: var(--antiflash-white);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+}
+
+.services .card a:hover {
+    color: var(--turquoise);
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.sub-header {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: auto;
+    color: var(--antiflash-white);
+    font-size: 1.5rem;
+}
+
+.pricing {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.pricing .card {
+    padding: 2rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.pricing .card .content {
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+}
+
+.pricing .card .content h1 {
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+
+}
+
+.pricing .card .content h3 {
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    
+}
+
+.pricing .card .content h3 {
+    color: var(--turquoise);
+}
+
+.pricing .card .content .btn {
+    /* lets center the button */
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+   }
+
+.pricing .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px 0 var(--turquoise);
+    text-shadow:
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+
+}
+
+footer {
+    position:inherit;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);    
+    gap: 2rem;
+    /* set background image */
+}
+
+footer .column .logo{
+    max-width: 100px;
+    /* how to center this img */
+    display: block;
+  
+}
+
+footer .column {
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+    padding-left: 15%;
+    background-color: var(--black-coral);
+}
+
+footer .column .social {
+    display: flex;
+    margin-bottom: 1rem;
+    color: var(--antiflash-white);
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+footer .column a {
+    font-size: large;
+    display: block;
+    gap: 2rem;
+    line-height: 3rem;
+    color: var(--turquoise);
+}
+
+footer .column a:hover {
+    color: var(--amethyst);
+}
+
+/* Incorporando la paleta de colores en el estilo del modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(22, 0, 104, 0.1); /* Black with opacity */
+    padding-top: 12vh; /* Location of the box */
+}
+
+.modal-content {
+    background-color: var(--antiflash-white);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--black-coral);
+    width: 50%; /* Adjusted width */
+    border-radius: 10px; /* Rounded corners */
+
+}
+
+/* The Close Button */
+.close {
+    color: var(--grape);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--blue-violet);
+}
+
+/* Form and input styles inside the modal */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-content form input,
+.modal-content form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--black-coral);
+}
+
+.modal-content form button {
+    background-color: var(--turquoise);
+    color: var(--antiflash-white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content form button:hover {
+    background-color: var(--blue-ncs);
+}
+
+
+
+
