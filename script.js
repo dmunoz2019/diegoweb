@@ -1,58 +1,81 @@
-// Get the modal
-var modal = document.getElementById('myModal');
+document.addEventListener('DOMContentLoaded', function() {
+    var modal = document.getElementById('myModal');
+    var form = modal.querySelector('form');
+    var btns = document.querySelectorAll('.btn');
+    var closeBtn = document.querySelector('.close');
 
-function insertDataIntoJson(name, description, email) {
-  var myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("Authorization", "Bearer pataGl1oT1QNPwCdz.a85e90ce06f1f1355ef4fe52768f744ddd66cacb3c3357a3582905f20214da4f");
-  myHeaders.append("Cookie", "brw=brwyqAdeNEDrHfS9a; AWSALB=lOuE83lv+eONBicvYS4Xilun89GXHLitbQ3j/jTnUM2a1gbDqG5C4jdMr2S4vsAL0sqL43LizKcRftansW8cEwwh0GHP9dHcJtLGLW1PFwmrsIJhG8AbJl8QN+Vd; AWSALBCORS=lOuE83lv+eONBicvYS4Xilun89GXHLitbQ3j/jTnUM2a1gbDqG5C4jdMr2S4vsAL0sqL43LizKcRftansW8cEwwh0GHP9dHcJtLGLW1PFwmrsIJhG8AbJl8QN+Vd");
+    // Function to insert data into JSON and make a POST request
+    function insertDataIntoJson(name, description, email) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer pataGl1oT1QNPwCdz.a85e90ce06f1f1355ef4fe52768f744ddd66cacb3c3357a3582905f20214da4f");
 
-  var raw = JSON.stringify({
-    "fields": {
-      "name": name,
-      "description": description,
-      "email": email
+        var raw = JSON.stringify({
+            "fields": {
+                "name": name,
+                "description": description,
+                "email": email
+            }
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://api.airtable.com/v0/appatSOYpAu35i9ae/leads", requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(result => {
+               
+            var sendButton = document.getElementById('send');
+            var loadingIndicator = document.getElementById('loading');
+            sendButton.style.display = "none";
+            loadingIndicator.style.display = "block";
+                modal.style.display = "none";
+                document.getElementById('name_contact').value = '';
+                document.getElementById('mail_contact').value = '';
+                document.getElementById('message_contact').value = '';
+                alert('Successfully sent');
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred, please try again.');
+            });
     }
-  });
 
-  var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-  };
+    // Handle form submission
+    function handleFormSubmit(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-  fetch("https://api.airtable.com/v0/appatSOYpAu35i9ae/leads", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
-}
+        var name = document.getElementById('name_contact').value;
+        var email = document.getElementById('mail_contact').value;
+        var message = document.getElementById('message_contact').value;
+        insertDataIntoJson(name, message, email);
+       
 
-var btn = document.querySelectorAll('.btn');
-var btnContact = document.getElementById('send');
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-btn.forEach(function(element) {
-    element.onclick = function() {
-        modal.style.display = "block";
+        
     }
+
+    // Attach event listener to form for the submit event
+    form.addEventListener('submit', handleFormSubmit);
+
+    // Open modal when any .btn is clicked
+    btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            modal.style.display = "block";
+        });
+    });
+
+    // Close modal when close button is clicked
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = "none";
+    });
 });
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-btnContact.onclick = function() {
-    var name = document.getElementsByName('name')[0].value;
-    var email = document.getElementById('email').value; // Uncommented to use in the function call
-    var message = document.getElementById('message').value; // Uncommented to use as description
-
-    // Call the previously defined function with the form data
-    insertDataIntoJson(name, message, email); // Assuming 'message' is used for the 'description' parameter
-
-    // You may handle the modal display and alert in the .then or .catch of the insertDataIntoJson if it's asynchronous and returns a promise
-    // For now, assuming the function does not handle UI feedback directly, you might want to place UI feedback here or adjust accordingly
-};
