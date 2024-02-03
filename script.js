@@ -30,15 +30,6 @@ function insertDataIntoJson(name, description, email) {
     .catch(error => console.log('error', error));
 }
 
-// Example usage
-// Suppose these values come from a form
-var name = "Union Square";
-var description = "Implementación de página web";
-var email = "testing@example.com";
-
-// Call the function with the form data
-insertDataIntoJson(name, description, email);
-
 // Get the button that opens the modal
 var btn = document.querySelectorAll('.btn');
 var btnContact = document.getElementById('send');
